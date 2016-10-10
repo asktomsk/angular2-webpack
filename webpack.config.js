@@ -127,7 +127,10 @@ module.exports = function makeWebpackConfig() {
 
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
-      {test: /\.html$/, loader: 'raw',  exclude: root('src', 'public')}
+      {test: /\.html$/, loader: 'raw',  exclude: root('src', 'public')},
+
+      // TODO: it looks like we don't need that
+      // { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
     ]
   };
 
@@ -203,6 +206,11 @@ module.exports = function makeWebpackConfig() {
           })
         ]
       }
+    }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
     })
   ];
 
